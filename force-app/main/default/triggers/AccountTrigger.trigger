@@ -1,4 +1,13 @@
 trigger AccountTrigger on Account (before insert, before update, after insert, after update) {
+
+    // check if switch is ON or OFF.
+    triggerSwitch__c accountSwitch = triggerSwitch__c.getInstance('account');
+    boolean accSwitch = accountSwitch.switch__c	; 
+    if (accSwitch == false) {
+        return;
+    }
+    // IF OFF 
+        // return 
     
     if(Trigger.isBefore){
      AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
@@ -10,20 +19,6 @@ if (Trigger.isAfter && Trigger.isUpdate) {
 }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // 10.08.2022
