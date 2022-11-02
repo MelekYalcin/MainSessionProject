@@ -1,3 +1,6 @@
+// updating desciption of all accounts via batch class.
+// getting statistics using statfeful.
+
 public  class AccountsBatch implements Database.Batchable<SObject>, Database.stateful{
     integer count = 0;
     // 1.start method
@@ -10,6 +13,7 @@ public  class AccountsBatch implements Database.Batchable<SObject>, Database.sta
     
         
 }
+// execute method runs multiple times to UPDATE accounts 
 public void execute(database.BatchableContext bc, List<Account> scope){
     for (account acc : scope) {
         acc.Description += '...updated via batch';
@@ -19,6 +23,7 @@ public void execute(database.BatchableContext bc, List<Account> scope){
     update scope;
     }
 
+    // finished method to print number of times execute RAN.
 public void finish(database.BatchableContext bc){
     system.debug('batch execution finished. Done. Simple? right?');
 
